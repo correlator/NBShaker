@@ -2,28 +2,16 @@ class Game < ActiveRecord::Base
 
   MAX_SCORE = 100
 
-  def game_round(p1_something, p2_somethig)
-    something
-    increment_score1
-    increment_score2
-    get_winner if game_over?
+  def update_score(player_score, score)
+    update_attribute(player_score.to_sym, score)
+    update_attribute(status, 'finished') if is_game_over?
   end
 
-  def increment_score1(amount)
-    @player1_score += amount
+  def is_game_over?
+    player_1_score >= 100 || player_2_score >= 100
   end
 
-  def increment_score2(amount)
-    @player2_score += amount
+  def winner
+    player_1_score > player_2_score ? player_1_name : player_2_name if is_game_over?
   end
-
-  def game_over?
-    @player1_score >= 100 || @player2_score >= 100
-  end
-
-  def get_winnner
-    return 'player1' if @player1_score > @player2_score
-    return 'player2'
-  end
-
 end

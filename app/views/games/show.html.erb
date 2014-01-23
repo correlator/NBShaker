@@ -24,17 +24,19 @@
       };
 
       var pusher = new Pusher('2e26a91c1f302424fac6');
-      var channel = pusher.subscribe('test_channel');
-      channel.bind('my_event', function(data) {
-        var playerScores = jQuery.parseJSON(data.message);
-        var player1Bar = $('#player1');
-        var player2Bar = $('#player2');
-        player1Bar.height(playerScores.player1) ;
-        player2Bar.height(playerScores.player2) ;
+      var channel = pusher.subscribe('nbshaker_channel');
+      channel.bind('score_updated_event', function(data) {
+          if (data.message.lastIndexOf("Winner is:", 0) === 0) {
+              $('#winner').text(data.message).show();
+          } else {
+              var playerScores = jQuery.parseJSON(data.message);
+              $('#player1').height(playerScores.player1);
+              $('#player2').height(playerScores.player2);
+          }
       });
     </script>
 </head>
 
 <div class="bar" id='player1'></div>
 <div class="bar" id='player2'></div>
-
+<div id="winner" style="display: none;"></div>
