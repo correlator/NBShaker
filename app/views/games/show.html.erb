@@ -6,7 +6,7 @@
         div.bar {
             display: inline-block;
             width: 100px;
-            height: 200px;
+            height: 0px;
             background-color: black;
             margin-left: 10px;
             margin-righ: 10px;
@@ -29,8 +29,8 @@
         var playerScores = jQuery.parseJSON(data.message);
         var player1Bar = $('#player1');
         var player2Bar = $('#player2');
-        player1Bar.height(player1Bar.height() * playerScores.player1) ;
-        player2Bar.height(player2Bar.height() * playerScores.player2) ;
+        player1Bar.height(playerScores.player1) ;
+        player2Bar.height(playerScores.player2) ;
       });
     </script>
 </head>
