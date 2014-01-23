@@ -3,8 +3,12 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 gem 'pusher'
+<<<<<<< HEAD
 gem 'sqlite3'
 
+=======
+gem 'pg'
+>>>>>>> b69c257083de2e912057f5e5f2c194f837b38eb5
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

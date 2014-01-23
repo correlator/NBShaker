@@ -8,7 +8,7 @@ NBShaker::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'play#index'
+   root 'games#show'
 
   namespace :api do
     match '/games' => 'games#index' , via: [:get, :post]
