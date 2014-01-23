@@ -1,12 +1,6 @@
-class Game
-  def initialize
-    @player1 = 'Jim'
-    @player2 = 'Leah'
-    @player1_score = 0
-    @player2_score = 0
-  end
-  MAX_SCORE = 100
+class Game < ActiveRecord::Base
 
+  MAX_SCORE = 100
 
   def game_round(p1_something, p2_somethig)
     something
