@@ -1,9 +1,9 @@
 class Game
   def initialize
-    @player1 = 
-    @player2 = 
-    @player1_score = 
-    @player2_score = 
+    @player1 = 'Jim'
+    @player2 = 'Leah'
+    @player1_score = 0
+    @player2_score = 0
   end
   MAX_SCORE = 100
 
@@ -12,7 +12,7 @@ class Game
     something
     increment_score1
     increment_score2
-
+    get_winner if game_over?
   end
 
   def increment_score1(amount)
