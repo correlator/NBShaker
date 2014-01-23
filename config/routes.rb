@@ -1,4 +1,7 @@
 NBShaker::Application.routes.draw do
+  get 'index', to: 'games#index'
+  get 'show', to: 'games#show'
+
   resources :games
 
   # The priority is based upon order of creation: first created -> highest priority.
