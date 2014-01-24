@@ -25,6 +25,7 @@ class Api::GamesController < ApplicationController
       message = "Winner is: #{game.winner}"
     else
       game.update_score!("#{params[:player]}_score".to_sym, params[:score].to_i)
+      game.reload
       message = %Q({"id": #{game.id}, "player_1": #{game.player_1_score}, "player_2": #{game.player_2_score}})
     end
     Pusher['nbshaker_channel'].trigger('score_updated_event', message: message)
