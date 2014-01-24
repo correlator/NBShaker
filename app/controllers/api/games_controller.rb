@@ -1,11 +1,12 @@
 class Api::GamesController < ApplicationController
 
   def index
+    player_name = params[:player_name]
     game = Game.find_by_status(:waiting)
     if game
-      game.join_2nd_player!
+      game.join_2nd_player!(player_name) unless game.player_1_name == player_name
     else
-      game = Game.create!(player_1_name: 'Lea', status: :waiting)
+      game = Game.create!(player_1_name: player_name, status: :waiting)
     end
 
     render json: game
