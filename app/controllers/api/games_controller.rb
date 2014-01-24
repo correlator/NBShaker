@@ -1,10 +1,9 @@
 class Api::GamesController < ApplicationController
 
   def index
-    puts "Hello"
     game = Game.find_by_status(:waiting)
     if game
-      game.update_attributes!(player_2_name: 'Player 2', status: :active)
+      game.join_2nd_player!
     else
       game = Game.create!(player_1_name: 'Player 1', status: :waiting)
     end
