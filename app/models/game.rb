@@ -11,7 +11,7 @@ class Game < ActiveRecord::Base
 
   def update_score(player_score, score)
     update_attribute(player_score.to_sym, score)
-    update_attribute(status, 'finished') if is_game_over?
+    update_attribute(:status, :finished) if is_game_over?
   end
 
   def is_game_over?

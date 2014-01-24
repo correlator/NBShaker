@@ -19,9 +19,7 @@ class Api::GamesController < ApplicationController
       game.update_score(:player_1_score, Random.rand(101))
       message = %Q({"player1": #{game.player_1_score}, "player2": #{game.player_2_score}})
     end
-    Pusher['nbshaker_channel'].trigger('score_updated_event', {
-       message: message
-    })
+    Pusher['nbshaker_channel'].trigger('score_updated_event', message: message)
     render nothing: true
   end
 end
