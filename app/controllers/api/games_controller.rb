@@ -1,16 +1,17 @@
 class Api::GamesController < ApplicationController
 
   def index
-    player_name = params[:player_name]
     game = Game.find_by_status(:waiting)
+    unless Game.where(status: :active).empty?
+      render nothing: true
+      return
+    end
     if game
-      if game.player_1_name != player_name
-        game.join_2nd_player!(player_name)
-        Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "active", "id": "#{game.id}"}))
-      end
+      game.join_2nd_player!
+    Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "active", "id": "#{game.id}"}))
     else
-      game = Game.create!(player_1_name: player_name, status: :waiting)
-      Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "waiting", "id": "#{game.id}"}))
+      game = Game.create!(player_1_name: 'Lea', status: :waiting)
+    Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "waiting", "id": "#{game.id}"}))
     end
 
     render json: game
