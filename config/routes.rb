@@ -1,18 +1,13 @@
 NBShaker::Application.routes.draw do
-  get 'index', to: 'games#index'
-  get 'show', to: 'games#show'
-
-  resources :games
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'games#show'
+  root 'games#index'
 
   namespace :api do
     match '/games' => 'games#index' , via: [:get, :post]
-    match  '/score' => 'games#update_score', via: [:get, :post]
+    match '/score' => 'games#update_score', via: [:get, :post]
     match '/decay' => 'games#decay', via: [:get, :post]
   end
   # Example of regular route:
