@@ -4,8 +4,10 @@ class Api::GamesController < ApplicationController
     game = Game.find_by_status(:waiting)
     if game
       game.join_2nd_player!
+    Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "active", "id": "#{game.id}"}))
     else
       game = Game.create!(player_1_name: 'Lea', status: :waiting)
+    Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "waiting", "id": "#{game.id}"}))
     end
 
     render json: game
