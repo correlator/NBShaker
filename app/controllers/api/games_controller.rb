@@ -20,7 +20,7 @@ class Api::GamesController < ApplicationController
       message = %Q({"id": #{game.id}, "Lea": #{game.player_1_score}, "Jim": #{game.player_2_score}})
     end
     Pusher['nbshaker_channel'].trigger('score_updated_event', message: message)
-    render json: game.id
+    render json: game
   end
 
   def decay
