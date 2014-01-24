@@ -2,8 +2,8 @@ class Game < ActiveRecord::Base
 
   MAX_SCORE = 100
 
-  def join_2nd_player!
-    update_attributes!(player_2_name: 'Jim', status: :active)
+  def join_2nd_player!(player_name)
+    update_attributes!(player_2_name: player_name, status: :active)
     Pusher['nbshaker_channel'].trigger('game_started_event', {
         message: ''
     })
