@@ -32,8 +32,8 @@
           } else {
               var playerScores = jQuery.parseJSON(data.message);
               id = playerScores.id;
-              $('#player1').animate({height: playerScores.Lea});
-              $('#player2').animate({height: playerScores.Jim});
+              $('#player1').animate({height: playerScores.player_1});
+              $('#player2').animate({height: playerScores.player_2});
           }
       });
       channel.bind('game_status_event', function(data) {
@@ -63,7 +63,7 @@
 </head>
 
 <h1 id='game'>NationBuilder Shaker</h1>
-<div style="position:absolute;left:50%;top:50%;height=300">
+<div style="position:absolute;left:50%;top:50%;height:300">
   <div class="bar" id='player1' style='bottom:10px;right:10px;position:absolute'></div>
   <div class="bar" id='player2' style='bottom:10px;left:10px;position:absolute'></div>
 </div>

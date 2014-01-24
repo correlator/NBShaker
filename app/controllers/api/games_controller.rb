@@ -22,7 +22,8 @@ class Api::GamesController < ApplicationController
       message = "Winner is: #{game.winner}"
     else
       game.update_score!("#{params[:player]}_score".to_sym, params[:score].to_i)
-      message = %Q({"id": #{game.id}, "Lea": #{game.player_1_score}, "Jim": #{game.player_2_score}})
+      game.reload
+      message = %Q({"id": #{game.id}, "player_1": #{game.player_1_score}, "player_2": #{game.player_2_score}})
     end
     Pusher['nbshaker_channel'].trigger('score_updated_event', message: message)
     render json: game.id
@@ -33,7 +34,7 @@ class Api::GamesController < ApplicationController
     game = Game.where(id: params[:id].to_i, status: :active).first
     if game
       game.decay!
-      Pusher['nbshaker_channel'].trigger('score_updated_event', message: %Q({"id": #{game.id}, "Lea": #{game.player_1_score}, "Jim": #{game.player_2_score}}))
+      Pusher['nbshaker_channel'].trigger('score_updated_event', message: %Q({"id": #{game.id}, "player_1": #{game.player_1_score}, "player_2": #{game.player_2_score}}))
     end
     render nothing: true
   end
