@@ -6,7 +6,7 @@
         div.bar {
             display: inline-block;
             width: 100px;
-            height: 0px;
+            height: 200px;
             background-color: black;
             margin-left: 10px;
             margin-righ: 10px;
@@ -23,6 +23,7 @@
           }
       };
 
+      var id = null;
       var pusher = new Pusher('2e26a91c1f302424fac6');
       var channel = pusher.subscribe('nbshaker_channel');
       channel.bind('score_updated_event', function(data) {
@@ -30,10 +31,26 @@
               $('#winner').text(data.message).show();
           } else {
               var playerScores = jQuery.parseJSON(data.message);
+              id = playerScores.id;
+              console.log(id);
               $('#player1').height(playerScores.Lea);
               $('#player2').height(playerScores.Jim);
           }
       });
+
+      function decay() {
+          if (id != null) {
+              $.post('/api/decay', {id: id});
+          }
+          setTimeout(decay, 500);
+      }
+
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      decay();
     </script>
 </head>
 

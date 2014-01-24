@@ -12,7 +12,8 @@ NBShaker::Application.routes.draw do
 
   namespace :api do
     match '/games' => 'games#index' , via: [:get, :post]
-    get  '/score' => 'games#update_score'
+    match  '/score' => 'games#update_score', via: [:get, :post]
+    match '/decay' => 'games#decay', via: [:get, :post]
   end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
