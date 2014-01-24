@@ -32,16 +32,9 @@
           } else {
               var playerScores = jQuery.parseJSON(data.message);
               id = playerScores.id;
+              $('#game_title').text(foo);
               $('#player1').height(playerScores.Lea);
               $('#player2').height(playerScores.Jim);
-          }
-      });
-      channel.bind('game_status_event', function(data) {
-          var gamestatus = jQuery.parseJSON(data.message);
-          if (gamestatus.status  == 'waiting') {
-              $('#game').text("Waiting for other player");
-          } else {
-              $('#game').text("Game: " + gamestatus.id);
           }
       });
 
@@ -49,7 +42,7 @@
           if (id != null) {
               $.post('/api/decay', {id: id});
           }
-          setTimeout(decay, 5000);
+          setTimeout(decay, 500);
       }
 
       $.ajaxSetup({
@@ -61,8 +54,7 @@
     </script>
 </head>
 
-<h1 id='game'>NationBuilder Shaker</h1>
-
+<h1 id='game_title'>HEYYYYYYY</h1>
 <div class="bar" id='player1'></div>
 <div class="bar" id='player2'></div>
 <div id="winner" style="display: none;"></div>
