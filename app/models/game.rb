@@ -10,7 +10,8 @@ class Game < ActiveRecord::Base
   end
 
   def update_score(player_score, score)
-    update_attribute(player_score.to_sym, score)
+    old_score = self.send(player_score).to_i
+    update_attribute(player_score.to_sym, old_score + score)
     update_attribute(:status, :finished) if is_game_over?
   end
 
