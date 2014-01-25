@@ -38,15 +38,14 @@
       });
       channel.bind('game_status_event', function(data) {
           var gamestatus = jQuery.parseJSON(data.message);
-          id = gamestatus.id;
-          if (gamestatus.status  == 'waiting') {
-          $('#game').text("Waiting for other player")
-          $('#player1').text(gamestatus.p1_name);
-          ;}
-          else {
-          $('#game').text("Game: " + id);}
-          $('#player2').text(gamestatus.p2_name);
-          })
+          if (gamestatus.status == 'waiting') {
+              $('#game').text("Waiting for other player");
+              $('#player1').text(gamestatus.p1_name);
+          } else {
+              $('#game').text("Game: " + gamestatus.id);
+              $('#player2').text(gamestatus.p2_name);
+          }
+      })
 
       function decay() {
           if (id != null) {
