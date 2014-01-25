@@ -8,11 +8,11 @@ class Api::GamesController < ApplicationController
       if game
         if game.player_1_name != player_name
           game.join_2nd_player!(player_name)
-          Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "active", "id": "#{game.id}"}))
+          Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "active", "id": "#{game.id}", "p2_name": "#{game.player_2_name}"}))
         end
       else
         game = Game.create!(player_1_name: player_name, status: :waiting)
-        Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "waiting", "id": "#{game.id}"}))
+        Pusher['nbshaker_channel'].trigger('game_status_event', message: %Q({"status": "waiting", "id": "#{game.id}", "p1_name": "#{game.player_1_name}"}))
       end
     end
 
