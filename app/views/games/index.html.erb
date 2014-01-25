@@ -39,8 +39,12 @@
       channel.bind('game_status_event', function(data) {
           var gamestatus = jQuery.parseJSON(data.message);
           if (gamestatus.status == 'waiting') {
+              $('#winner').text("").hide();
               $('#game').text("Waiting for other player");
               $('#player_1_name').text(gamestatus.p1_name);
+              $('#player_2_name').text('');
+              $('#player1').animate({height:0});
+              $('#player2').animate({height:0});
           } else {
               $('#game').text("Game: " + gamestatus.id);
               $('#player_2_name').text(gamestatus.p2_name);
