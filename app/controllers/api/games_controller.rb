@@ -35,7 +35,7 @@ class Api::GamesController < ApplicationController
   def decay
     puts params[:id]
     game = Game.where(id: params[:id].to_i, status: :active).first
-    if game.status == :active
+    if game
       game.decay!
       Pusher['nbshaker_channel'].trigger('score_updated_event', message: %Q({"id": #{game.id}, "player_1": #{game.player_1_score}, "player_2": #{game.player_2_score}}))
     end
